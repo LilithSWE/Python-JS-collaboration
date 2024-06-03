@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './vendor/reset';
+@import './variables/variables';
+@import './variables/tailwind-custom';
