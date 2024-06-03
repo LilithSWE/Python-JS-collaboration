@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Running",
+    "type": "cardio",
+    "muscle": "calves",
+    "equipment": "none",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at dolor vel erat tempor aliquet. Pellentesque habitant morbi tristique."
+  },
+  {
+    "name": "Cycling",
+    "type": "cardio",
+    "muscle": "quadriceps",
+    "equipment": "bike",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis, tortor at consequat varius, massa nisi malesuada urna, et sagittis purus."
+  },
+  {
+    "name": "Swimming",
+    "type": "cardio",
+    "muscle": "lats",
+    "equipment": "none",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tincidunt nisi nec lectus cursus, a auctor ligula tincidunt."
+  },
+  {
+    "name": "Clean and Jerk",
+    "type": "olympic_weightlifting",
+    "muscle": "quadriceps",
+    "equipment": "barbell",
+    "difficulty": "expert",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut arcu non metus luctus fringilla."
+  },
+  {
+    "name": "Snatch",
+    "type": "olympic_weightlifting",
+    "muscle": "shoulders",
+    "equipment": "barbell",
+    "difficulty": "expert",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum tortor at libero venenatis, at hendrerit est varius."
+  },
+  {
+    "name": "Box Jumps",
+    "type": "plyometrics",
+    "muscle": "hamstrings",
+    "equipment": "box",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis metus eu felis luctus, in bibendum sapien elementum."
+  },
+  {
+    "name": "Depth Jumps",
+    "type": "plyometrics",
+    "muscle": "calves",
+    "equipment": "box",
+    "difficulty": "expert",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget nisl nec libero auctor cursus."
+  },
+  {
+    "name": "Squat",
+    "type": "powerlifting",
+    "muscle": "glutes",
+    "equipment": "barbell",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at sapien vel justo eleifend faucibus."
+  },
+  {
+    "name": "Deadlift",
+    "type": "powerlifting",
+    "muscle": "lower_back",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Integer vitae nibh at nulla pulvinar dignissim."
+  },
+  {
+    "name": "Bench Press",
+    "type": "strength",
+    "muscle": "chest",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor neque nec mauris dictum, sed accumsan mauris malesuada."
+  },
+  {
+    "name": "Overhead Press",
+    "type": "strength",
+    "muscle": "shoulders",
+    "equipment": "barbell",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet facilisis urna, vitae vulputate libero."
+  },
+  {
+    "name": "Forward Bend",
+    "type": "stretching",
+    "muscle": "lower_back",
+    "equipment": "none",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et urna nec ipsum pulvinar fermentum."
+  },
+  {
+    "name": "Hamstring Stretch",
+    "type": "stretching",
+    "muscle": "hamstrings",
+    "equipment": "none",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus."
+  },
+  {
+    "name": "Tire Flip",
+    "type": "strongman",
+    "muscle": "forearms",
+    "equipment": "tire",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non purus vitae sem scelerisque suscipit."
+  },
+  {
+    "name": "Log Lift",
+    "type": "strongman",
+    "muscle": "shoulders",
+    "equipment": "log",
+    "difficulty": "expert",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in nibh lacinia, imperdiet mauris id, maximus justo."
+  },
+  {
+    "name": "Plank",
+    "type": "strength",
+    "muscle": "abdominals",
+    "equipment": "none",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Proin dignissim sem sed nulla hendrerit aliquam."
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "type": "strength",
+    "muscle": "abdominals",
+    "equipment": "bar",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus, lorem vel aliquam pharetra, sapien eros ultricies risus."
+  },
+  {
+    "name": "Lateral Raise",
+    "type": "strength",
+    "muscle": "middle_back",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Nam ultricies lectus ut libero posuere tincidunt."
+  },
+  {
+    "name": "Bent Over Row",
+    "type": "strength",
+    "muscle": "middle_back",
+    "equipment": "barbell",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec turpis ut risus feugiat cursus."
+  },
+  {
+    "name": "Shrug",
+    "type": "strength",
+    "muscle": "traps",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget massa nec erat consectetur sollicitudin."
+  },
+  {
+    "name": "Face Pull",
+    "type": "strength",
+    "muscle": "traps",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper lectus vel nibh fermentum, in malesuada urna fringilla."
+  }
+]
