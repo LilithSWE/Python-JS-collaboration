@@ -1,0 +1,7 @@
+$debug: true;
+
+div {
+  @if debug {
+    border: 1px solid hotpink;
+  }
+}
