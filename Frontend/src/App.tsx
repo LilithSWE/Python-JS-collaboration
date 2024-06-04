@@ -3,10 +3,10 @@ import LandingPage from "./components/landing-page/LandingPage";
 
 
 function App() {
-  return 
+  return( 
   <>
-  <LandingPage /> 
-  </>;
-}
+    <LandingPage /> 
+  </>
+)}
 
 export default App;
