@@ -5,6 +5,9 @@ export default {
     extend: {
       colors: {
         bgExcersise: 'lightgray',
+        orange: 'orange',
+        purple: '#8c188c',
+        purpleHover: '#bd37bd',
       },
     },
   },
