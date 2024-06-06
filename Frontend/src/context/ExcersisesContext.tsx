@@ -1,25 +1,39 @@
-import { createContext, ReactNode } from 'react';
+import { createContext, ReactNode, useState } from 'react';
+import data from '../data/excersises.json';
+import { getTextWithFirstLetterUpperCase } from '../assets/utils/helperfunctions/helperfunctions';
 
-const ExcersisesContext = createContext<IExcersisesProps | undefined>(
-  undefined
-);
+const ExcersisesContext = createContext<IExcersisesContextProps | undefined>(undefined);
 
-interface IExcersisesProps {}
+interface IExcersisesProps {
+  id: number;
+  excersise: string;
+}
+
+interface IExcersisesContextProps {
+  types: IExcersisesProps[];
+}
 
 interface IContextProps {
   children: ReactNode;
 }
 
-export const ExcersisesContextProvider: React.FC<IContextProps> = ({
-  children,
-}) => {
-  const excersisesValues = {};
+const excersises = data
+  .map((excersise, index) => ({
+    id: index + 1,
+    excersise: getTextWithFirstLetterUpperCase(excersise.type.replace('_', ' ')),
+  }))
+  .filter((type, index, types) => {
+    return index === types.findIndex(t => t.excersise === type.excersise);
+  });
 
-  return (
-    <ExcersisesContext.Provider value={excersisesValues}>
-      {children}
-    </ExcersisesContext.Provider>
-  );
+export const ExcersisesContextProvider: React.FC<IContextProps> = ({ children }) => {
+  const [types, setTypes] = useState<IExcersisesProps[]>(excersises);
+
+  const excersisesValues = {
+    types: types,
+  };
+
+  return <ExcersisesContext.Provider value={excersisesValues}>{children}</ExcersisesContext.Provider>;
 };
 
 export default ExcersisesContext;
