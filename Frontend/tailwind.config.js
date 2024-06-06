@@ -5,9 +5,10 @@ export default {
     extend: {
       colors: {
         bgExcersise: 'lightgray',
-        orange: 'orange',
-        purple: '#8c188c',
+        orangeColor: 'orange',
+        purpleColor: '#8c188c',
         purpleHover: '#bd37bd',
+        inputColor: '#f6f2f2',
       },
     },
   },
