@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         bgExcersise: 'lightgray',
+        lightblueColor: 'rgb(191 219 254)',
       },
     },
   },
