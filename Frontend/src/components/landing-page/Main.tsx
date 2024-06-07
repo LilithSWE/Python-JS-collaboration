@@ -1,4 +1,5 @@
 import Types from './Types';
+import LogoutButton from './LogoutButton';
 
 const Main = () => {
   return (
@@ -6,6 +7,7 @@ const Main = () => {
       <h2 className="font-sans text-2xl">Let's excercise!</h2>
       <div className="font-sans h-96">
         <Types />
+        <LogoutButton />
       </div>
     </main>
   );

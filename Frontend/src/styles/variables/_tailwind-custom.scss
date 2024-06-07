@@ -1,0 +1,7 @@
+.input {
+  @apply px-2 py-[12px] bg-inputColor rounded-sm;
+}
+
+.primary-button {
+  @apply bg-purpleColor text-white text-lg rounded-md px-8 py-2 hover:bg-purpleHover;
+}
