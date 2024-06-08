@@ -99,7 +99,7 @@ def generate_unique_id(userData):
         if not any(user['id'] == random_id for user in userData):
             return random_id
 
-# Try to log in using email + password. If correct answer with message + id. 
+# Try to log in using email + password in a JSON object. If correct answer with message + id. 
 @app.post("/user/login")
 async def try_login(login: Login):
     filepath: str = "./Databases/login.json"
@@ -121,6 +121,7 @@ async def try_login(login: Login):
                 return {"message": "The password isn't a match"}
         else:
             return {"message": "There is no such email in the database"}
+
 
 
 
