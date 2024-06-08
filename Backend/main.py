@@ -52,6 +52,10 @@ class NewUser(BaseModel):
     email: str
     password: str
 
+class Login(BaseModel):
+    email: str
+    password: str
+
 # Adding a new user + failsafes for: 
     # Wrong data structure 
     # Can't find db
@@ -94,6 +98,30 @@ def generate_unique_id(userData):
         random_id = random.randint(1, 1000000)  # Generate a random ID within the range 1 to 1,000,000
         if not any(user['id'] == random_id for user in userData):
             return random_id
+
+# Try to log in using email + password. If correct answer with message + id. 
+@app.post("/user/login")
+async def try_login(login: Login):
+    filepath: str = "./Databases/login.json"
+
+    # Try to connect to database
+    try:
+        with open(filepath, "r") as userDB:
+            userData = json.load(userDB)
+    except FileNotFoundError:
+        return {"message": "The database could not be found"}
+
+    # Loop through current reg users and look for matches.
+    for user in userData:
+        # Check email fisrt, then password
+        if user['email'] == login.email:
+            if user['password'] == login.password:
+                return {"message": "The user was found in the database", "id": user["id"]}
+            else: 
+                return {"message": "The password isn't a match"}
+        else:
+            return {"message": "There is no such email in the database"}
+
 
 
 # --------EXCERSISE API----------- 
