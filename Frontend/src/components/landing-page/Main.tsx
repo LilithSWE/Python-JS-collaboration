@@ -1,15 +1,10 @@
 import Types from './Types';
 import LogoutButton from './LogoutButton';
 import Muscle from './Muscle';
-import { useContext } from 'react';
-import ExcersisesContext from '../../context/ExcersisesContext';
+import useExcersise from '../../assets/custom-hooks/useExcersise';
 
 const Main = () => {
-  const context = useContext(ExcersisesContext);
-
-  if (!context) return;
-
-  const { muscles, pickMuscleFromDropDown } = context;
+  const { muscles, pickMuscleFromDropDown } = useExcersise();
 
   return (
     <main className="h-full bg-[#f2fcfc] flex flex-col gap-4">
