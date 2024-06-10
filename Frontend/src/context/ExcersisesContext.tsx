@@ -7,7 +7,9 @@ import { musclesData, excersisesData } from '../data/excersisesData';
 interface IExcersisesContextProps {
   types: IExcersise[];
   muscles: IMuscle[];
+  selectedType: string;
   pickMuscleFromDropDown: (e: ChangeEvent<HTMLSelectElement>) => void;
+  handleClickOnType: (type: string) => void;
 }
 
 interface IContextProps {
@@ -26,14 +28,16 @@ export const ExcersisesContextProvider: React.FC<IContextProps> = ({ children })
     setSelectedMuscle(e.target.value);
   };
 
-  useEffect(() => {
-    console.log('selected muscle:', selectedMuscle);
-  }, [selectedMuscle]);
+  const handleClickOnType = (type: string) => {
+    setSelectedType(type);
+  };
 
   const excersisesValues = {
     muscles: muscles,
-    pickMuscleFromDropDown: pickMuscleFromDropDown,
     types: types,
+    selectedType: selectedType,
+    pickMuscleFromDropDown: pickMuscleFromDropDown,
+    handleClickOnType: handleClickOnType,
   };
 
   return <ExcersisesContext.Provider value={excersisesValues}>{children}</ExcersisesContext.Provider>;
