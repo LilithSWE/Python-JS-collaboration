@@ -4,7 +4,7 @@ const LogoutButton = () => {
   const { changeActivePage } = useLogin();
 
   return (
-    <button className="primary-button" onClick={() => changeActivePage('login')}>
+    <button className="primary-button w-[125px]" onClick={() => changeActivePage('login')}>
       Logout
     </button>
   );
