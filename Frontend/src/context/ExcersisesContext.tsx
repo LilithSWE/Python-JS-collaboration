@@ -17,9 +17,13 @@ const musclesData = data
     return index === muscles.findIndex(m => m.muscle === muscle.muscle);
   });
 
-const ExcersisesContext = createContext<IExcersisesProps | undefined>(undefined);
-
 interface IExcersisesProps {
+  id: number;
+  excersise: string;
+}
+
+interface IExcersisesContextProps {
+  types: IExcersisesProps[];
   muscles: IMuscle[];
   pickMuscleFromDropDown: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -28,9 +32,21 @@ interface IContextProps {
   children: ReactNode;
 }
 
+const ExcersisesContext = createContext<IExcersisesContextProps | undefined>(undefined);
+
+const excersises = data
+  .map((excersise, index) => ({
+    id: index + 1,
+    excersise: getTextWithFirstLetterUpperCase(excersise.type.replace('_', ' ')),
+  }))
+  .filter((type, index, types) => {
+    return index === types.findIndex(t => t.excersise === type.excersise);
+  });
+
 export const ExcersisesContextProvider: React.FC<IContextProps> = ({ children }) => {
   const [muscles, setMuscles] = useState<IMuscle[]>(musclesData);
   const [selectedMuscle, setSelectedMuscle] = useState(musclesData[0].muscle);
+  const [types, setTypes] = useState<IExcersisesProps[]>(excersises);
 
   const pickMuscleFromDropDown = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedMuscle(e.target.value);
@@ -43,6 +59,7 @@ export const ExcersisesContextProvider: React.FC<IContextProps> = ({ children })
   const excersisesValues = {
     muscles: muscles,
     pickMuscleFromDropDown: pickMuscleFromDropDown,
+    types: types,
   };
 
   return <ExcersisesContext.Provider value={excersisesValues}>{children}</ExcersisesContext.Provider>;
