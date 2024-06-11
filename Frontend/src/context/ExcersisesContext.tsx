@@ -1,11 +1,11 @@
-import { ChangeEvent, createContext, ReactNode, useEffect, useState } from 'react';
-import { IMuscle, IExcersise } from '../utils/types/types';
+import { ChangeEvent, createContext, ReactNode, useState } from 'react';
+import { IMuscle, IExcersiseObject } from '../assets/utils/types/types';
 import { musclesData, excersisesData } from '../data/excersisesData';
 
 // Should probably refactor this later as a helperfunction to avoid the repeat
 
 interface IExcersisesContextProps {
-  types: IExcersise[];
+  types: IExcersiseObject[];
   muscles: IMuscle[];
   selectedType: string;
   pickMuscleFromDropDown: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -21,7 +21,7 @@ const ExcersisesContext = createContext<IExcersisesContextProps | undefined>(und
 export const ExcersisesContextProvider: React.FC<IContextProps> = ({ children }) => {
   const [muscles, setMuscles] = useState<IMuscle[]>(musclesData);
   const [selectedMuscle, setSelectedMuscle] = useState(musclesData[0].muscle);
-  const [types, setTypes] = useState<IExcersise[]>(excersisesData);
+  const [types, setTypes] = useState<IExcersiseObject[]>(excersisesData);
   const [selectedType, setSelectedType] = useState(excersisesData[0].excersise);
 
   const pickMuscleFromDropDown = (e: ChangeEvent<HTMLSelectElement>) => {
