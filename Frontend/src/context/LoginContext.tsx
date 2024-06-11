@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, FormEvent } from 'react';
+import { IActivePage } from '../assets/utils/types/types';
 
 const LoginContext = createContext<ILoginProps | undefined>(undefined);
 
@@ -16,13 +17,8 @@ interface IContextProps {
   children: ReactNode;
 }
 
-interface IActivePage {
-  login: boolean;
-  landing: boolean;
-}
-
 export const LoginContextProvider: React.FC<IContextProps> = ({ children }) => {
-  const [pageActive, setPageActive] = useState({ login: true, landing: false });
+  const [pageActive, setPageActive] = useState({ login: true, landing: false, create: false });
   const [userInput, setUserInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
