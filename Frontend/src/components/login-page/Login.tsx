@@ -1,6 +1,7 @@
 import useLogin from '../../assets/custom-hooks/useLogin';
+import CreateAccountButton from './CreateAccountButton';
 import LoginButton from './LoginButton';
-import TextInput from './TextInput';
+import LoginInput from './LoginInput';
 
 const Login = () => {
   const { userInput, passwordInput, handleChangeOnPasswordInput, handleChangeOnUserInput } = useLogin();
@@ -21,10 +22,11 @@ const Login = () => {
         <form className="w-full max-w-[400px] flex flex-col gap-4 items-center">
           {inputs.map(input => {
             const { id, text, value, changeInput } = input;
-            return <TextInput key={id} text={text} value={value} changeInput={changeInput} />;
+            return <LoginInput key={id} text={text} value={value} changeInput={changeInput} />;
           })}
           <LoginButton />
         </form>
+        <CreateAccountButton />
       </section>
     </>
   );
