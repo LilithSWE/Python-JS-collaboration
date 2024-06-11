@@ -7,15 +7,22 @@ interface ITextInputProps {
   changeInput: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
-const TextInput: React.FC<ITextInputProps> = ({ text, value, changeInput }) => {
+const LoginInput: React.FC<ITextInputProps> = ({ text, value, changeInput }) => {
   return (
     <div className="flex flex-col w-full">
       <label className="text-lg" htmlFor={text}>
         {getTextWithFirstLetterUpperCase(text)}
       </label>
-      <input onChange={changeInput} type="text" name={text} placeholder={text} className="input" value={value} />
+      <input
+        onChange={changeInput}
+        type={text === 'password' ? 'password' : 'text'}
+        name={text}
+        placeholder={text}
+        className="input"
+        value={value}
+      />
     </div>
   );
 };
 
-export default TextInput;
+export default LoginInput;
