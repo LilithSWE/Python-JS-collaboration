@@ -11,5 +11,6 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setupTests.ts',
+    reporters: ['default', 'html'],
   },
 });
