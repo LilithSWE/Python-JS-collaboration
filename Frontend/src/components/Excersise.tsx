@@ -1,15 +1,15 @@
-import { IExcersise } from '../assets/utils/types/types';
+import { ITrainingData } from '../assets/utils/types/types';
 import ExcersiseInfo from './ExcersiseInfo';
 import { v4 as uuidv4 } from 'uuid';
 
 interface IExcersiseProp {
-  excersiseInfo: IExcersise;
+  excersiseInfo: ITrainingData;
 }
 
 const Excersise: React.FC<IExcersiseProp> = ({ excersiseInfo }) => {
   const { name, type, muscle, equipment, difficulty, instructions } = excersiseInfo;
 
-  const excerises = [
+  const excercises = [
     {
       category: 'type',
       text: type,
@@ -29,11 +29,11 @@ const Excersise: React.FC<IExcersiseProp> = ({ excersiseInfo }) => {
   ];
 
   return (
-    <div className="w-[300px] rounded-md pt-2 pb-4 px-2 flex flex-col gap-4 bg-bgExcersise">
+    <div className="w-[300px] rounded-md pt-2 pb-4 px-2 flex flex-col gap-4 bg-lightblueColor">
       <h2 className="text-2xl text-center">{name}</h2>
       <div className="flex flex-col gap-4">
-        {excerises.map(excersise => {
-          return <ExcersiseInfo key={uuidv4()} category={excersise.category} text={excersise.text} />;
+        {excercises.map(excercise => {
+          return <ExcersiseInfo key={uuidv4()} category={excercise.category} text={excercise.text} />;
         })}
       </div>
       <div className="flex flex-col gap-4">
