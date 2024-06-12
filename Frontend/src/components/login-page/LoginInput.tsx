@@ -14,6 +14,7 @@ const LoginInput: React.FC<ITextInputProps> = ({ text, value, changeInput }) => 
         {getTextWithFirstLetterUpperCase(text)}
       </label>
       <input
+        id={text}
         onChange={changeInput}
         type={text === 'password' ? 'password' : 'text'}
         name={text}
