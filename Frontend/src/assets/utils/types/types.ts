@@ -1,5 +1,5 @@
-export interface IExcersise {
-  id: string;
+export interface ITrainingData {
+  id?: string;
   name: string;
   type: string;
   muscle: string;
@@ -24,7 +24,7 @@ export interface IMuscle {
 
 export interface IExcersiseObject {
   id: number;
-  excersise: string;
+  excercise: string;
 }
 
 export interface IActivePage {
