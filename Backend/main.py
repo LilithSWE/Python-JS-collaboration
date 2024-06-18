@@ -136,27 +136,27 @@ class Exercise(BaseModel):
     instructions: str
 
 class Search_Term(BaseModel):
-    search_term: str
+    search: str
 
-def classify_term(search_term:str):
+def classify_term(search:str):
     types = ['cardio', 'olympic_weightlifting', 'plyometrics', 'powerlifting', 'strength', 'stretching', 'strongman']
     muscles = ['abdominals', 'abductors', 'adductors', 'biceps', 'calves', 'chest', 'forearms', 'glutes', 'hamstrings', 'lats', 'lower_back', 'middle_back', 'neck', 'quadriceps', 'traps', 'triceps']
     difficulties = ['beginner', 'intermediate', 'expert']
     
-    if search_term in types:
+    if search in types:
         return 'type'
-    elif search_term in muscles:
+    elif search in muscles:
         return 'muscle'
-    elif search_term in difficulties:
+    elif search in difficulties:
         return 'difficulty'
     else:
         return 'error'
 
 @app.get("/exercise/search")
-async def get_exercises(search_term: Search_Term):
-    theme: str = classify_term(search_term.search_term)
+async def get_exercises(search: Search_Term):
+    theme: str = classify_term(search.search)
     if theme != 'error':
-        api_url = 'https://api.api-ninjas.com/v1/exercises?{}={}'.format(theme, search_term.search_term)
+        api_url = 'https://api.api-ninjas.com/v1/exercises?{}={}'.format(theme, search.search)
         response = requests.get(api_url, headers={'X-Api-Key': api_key})
         if response.status_code == requests.codes.ok:
             exercises = response.json()
