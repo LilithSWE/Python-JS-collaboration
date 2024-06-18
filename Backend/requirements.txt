@@ -1,4 +1,5 @@
 fastapi
+requests
 redis
 types-redis
 uvicorn
