@@ -163,7 +163,8 @@ async def get_exercises(search: Search_Term):
             return {"statusCode": response.status_code, "message": "10 exercises were found", "exercises": exercises}
         else:
             return {"statusCode": response.status_code, "message": response.text}
-
+    elif theme == 'error': 
+        return {"statusCode": 422, "message": "Invalid search term used"}
 
 
 
