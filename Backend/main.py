@@ -70,7 +70,7 @@ async def get_data(newUser: NewUser):
         with open(filepath, "r") as userDB:
             userData = json.load(userDB)
     except FileNotFoundError:
-        return {"message": "The database could not be found"}
+        return {"statusCode": 503, "message": "The database could not be found"}
 
     # Loop through current reg users and look for matches.
     for user in userData:
@@ -78,7 +78,7 @@ async def get_data(newUser: NewUser):
         if user['email'] == newUser.email:
             alreadyRegistered = True
             userDB.close
-            return {"message": "The user is already registered in the database"}
+            return {"statusCode": 409, "message": "The user is already registered in the database"}
 
 
     # If none, add and send statuscode + add user
@@ -91,7 +91,7 @@ async def get_data(newUser: NewUser):
         new_user.update(new_user_dict)
 
         write_in_json(new_user, filepath)
-        return {"message": "The user was added to the database"}
+        return {"statusCode": 201, "message": "The user was added to the database"}
 
 def generate_unique_id(userData):
     while True:
@@ -109,18 +109,18 @@ async def try_login(login: Login):
         with open(filepath, "r") as userDB:
             userData = json.load(userDB)
     except FileNotFoundError:
-        return {"message": "The database could not be found"}
+        return {"statusCode": 503, "message": "The database could not be found"}
 
     # Loop through current reg users and look for matches.
     for user in userData:
         # Check email fisrt, then password
         if user['email'] == login.email:
             if user['password'] == login.password:
-                return {"message": "The user was found in the database", "id": user["id"]}
+                return {"statusCode": 200, "message": "The user was found in the database", "id": user["id"]}
             else: 
-                return {"message": "The password isn't a match"}
+                return {"statusCode": 401, "message": "The password isn't a match"}
         else:
-            return {"message": "There is no such email in the database"}
+            return {"statusCode": 401, "message": "There is no such email in the database"}
 
 
 
