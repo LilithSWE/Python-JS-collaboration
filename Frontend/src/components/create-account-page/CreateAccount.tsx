@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import axios from 'axios'; 
 import { ICreateInputs } from '../../assets/utils/types/types';
 import CreateAccountInput from './CreateAccountInput';
 import GoBackButton from './GoBackButton';
 
-const CreateAccount = () => {
+
+const CreateAccount: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<{ [key: string]: string }>({
@@ -11,7 +13,7 @@ const CreateAccount = () => {
     lastname: '',
     email: '',
     password: '',
-  });
+  }); 
 
   const inputs = [
     { id: 1, type: 'firstname', text: 'firstname', placeholder: 'first name' },
@@ -21,33 +23,24 @@ const CreateAccount = () => {
   ];
 
   const handleSubmit = async () => {
-    setLoading(true);
-    setError(null);    
-
-    inputs.forEach(input => {
-      const value = (document.getElementById(input.type) as HTMLInputElement)?.value ?? '';
-      setFormData(prevData => ({ ...prevData, [input.type]: value }));
-    });
+    setLoading(true);    
 
     try {
-      const response = await fetch('http://XXX/user/add', {
-        method: 'POST',
+      const response = await axios.post('http://XXX/user/add', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
-  
+
       if (response.status === 201) {
-        const data = await response.json();
-        console.log('Account created!', data);
+        console.log('Account created!', response.data);
         alert("You are now a member and ready to log in! Yay! :)");
       } else if (response.status === 409) {
         setError('User already exists with this email.');
       } else {
         throw new Error(`Server returned status: ${response.status}`);
       }
-  
+
     } catch (error) {
       console.error('Something went wrong:', error);
       alert("Something went terribly wrong... :(");
