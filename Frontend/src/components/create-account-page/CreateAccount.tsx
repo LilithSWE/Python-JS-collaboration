@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import axios from 'axios'; 
+//import { useState } from 'react';
 import { ICreateInputs } from '../../assets/utils/types/types';
 import CreateAccountInput from './CreateAccountInput';
 import GoBackButton from './GoBackButton';
 
 
-const CreateAccount: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+const CreateAccount = () => {
+/*   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<{ [key: string]: string }>({
     firstname: '',
     lastname: '',
     email: '',
     password: '',
-  }); 
+  });  */
 
   const inputs = [
     { id: 1, type: 'firstname', text: 'firstname', placeholder: 'first name' },
@@ -22,9 +21,7 @@ const CreateAccount: React.FC = () => {
     { id: 4, type: 'password', text: 'password', placeholder: 'password' },
   ];
 
-  const handleSubmit = async () => {
-    setLoading(true);    
-
+  /* const handleSubmit = async () => { 
     try {
       const response = await axios.post('http://XXX/user/add', formData, {
         headers: {
@@ -41,15 +38,15 @@ const CreateAccount: React.FC = () => {
         throw new Error(`Server returned status: ${response.status}`);
       }
 
-    } catch (error) {
-      console.error('Something went wrong:', error);
-      alert("Something went terribly wrong... :(");
-      setError('Failed to create account. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+      } catch (error) {
+        console.error('Something went wrong:', error);
+        alert("Something went terribly wrong... :(");
+        setError('Failed to create account. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+ */
   return (
     <section className="flex flex-col items-center gap-10 mt-60">
       <h2 className="uppercase text-3xl w-[300px] text-center">Create Account</h2>
