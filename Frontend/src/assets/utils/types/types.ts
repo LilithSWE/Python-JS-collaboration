@@ -34,8 +34,8 @@ export interface IActivePage {
 }
 
 export interface ICreateInputs {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
