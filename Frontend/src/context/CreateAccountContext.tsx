@@ -7,7 +7,7 @@ const CreateAccountContext = createContext<ICreateAccountProps | undefined>(unde
 interface ICreateAccountProps {
   createInputs: ICreateInputs;
   setInputOnChange: (e: FormEvent<HTMLInputElement>, key: keyof ICreateInputs) => void;
-  handleSubmit: (formData: ICreateInputs) => Promise<void>;
+  handleSubmit: (createInputs: ICreateInputs) => Promise<void>;
   error: string;
   loading: boolean;
 }
@@ -15,6 +15,7 @@ interface ICreateAccountProps {
 interface IContextProps {
   children: ReactNode;
 }
+
 
 export const CreateAccountContextProvider: React.FC<IContextProps> = ({ children }) => {
   const [createInputs, setCreateInputs] = useState({ firstName: '', lastName: '', email: '', password: '' });
@@ -31,6 +32,7 @@ export const CreateAccountContextProvider: React.FC<IContextProps> = ({ children
       return { ...prev, [key]: target.value };
     });
   };
+
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -58,7 +60,7 @@ export const CreateAccountContextProvider: React.FC<IContextProps> = ({ children
       setLoading(false);
     }
   };
-
+  
   const createAccountContextValues = {
     createInputs: createInputs,
     error: error,
