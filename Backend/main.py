@@ -2,16 +2,17 @@ import os
 import json
 import random
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, requests
 from pydantic import BaseModel
+import requests
 app = FastAPI()
 
 
 # --------ENCRYPTION----------- 
-load_dotenv() 
+load_dotenv('Backend\\.env') 
 # accessing and printing value - add as requirement to all calls to backend later. 
-print(os.getenv("MY_FE"))
-print(os.getenv("MY_API"))
+fe_key = os.getenv("MY_FE")
+api_key = os.getenv("MY_API")
 
 # --------SERVER----------- 
 # Is backend online? 
@@ -113,7 +114,7 @@ async def try_login(login: Login):
 
     # Loop through current reg users and look for matches.
     for user in userData:
-        # Check email fisrt, then password
+        # Check email first, then password
         if user['email'] == login.email:
             if user['password'] == login.password:
                 return {"statusCode": 200, "message": "The user was found in the database", "id": user["id"]}
@@ -126,24 +127,82 @@ async def try_login(login: Login):
 
 
 # --------EXCERSISE API----------- 
-# @app.post("/api/data")
-# async def get_data(request_data: RequestData):
-#     try:
-#         api_url = 'https://api.example.com/data'
-#         async with httpx.AsyncClient() as client:
-#             response = await client.post(api_url, json=request_data.dict())
-#             api_response = response.json()
-#         return api_response
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
+
+class Exercise(BaseModel):
+    name: str
+    type: str
+    muscle: str
+    difficulty: str
+    instructions: str
+
+class Search_Term(BaseModel):
+    search: str
+
+def classify_term(search:str):
+    types = ['cardio', 'olympic_weightlifting', 'plyometrics', 'powerlifting', 'strength', 'stretching', 'strongman']
+    muscles = ['abdominals', 'abductors', 'adductors', 'biceps', 'calves', 'chest', 'forearms', 'glutes', 'hamstrings', 'lats', 'lower_back', 'middle_back', 'neck', 'quadriceps', 'traps', 'triceps']
+    difficulties = ['beginner', 'intermediate', 'expert']
+    
+    if search in types:
+        return 'type'
+    elif search in muscles:
+        return 'muscle'
+    elif search in difficulties:
+        return 'difficulty'
+    else:
+        return 'error'
+
+@app.get("/exercise/search")
+async def get_exercises(search: Search_Term):
+    theme: str = classify_term(search.search)
+    if theme != 'error':
+        api_url = 'https://api.api-ninjas.com/v1/exercises?{}={}'.format(theme, search.search)
+        response = requests.get(api_url, headers={'X-Api-Key': api_key})
+        if response.status_code == requests.codes.ok:
+            exercises = response.json()
+            return {"statusCode": response.status_code, "message": "10 exercises were found", "exercises": exercises}
+        else:
+            return {"statusCode": response.status_code, "message": response.text}
+    elif theme == 'error': 
+        return {"statusCode": 422, "message": "Invalid search term used"}
 
 
 
 
 # --------USER FAVOURITES----------- 
-#Connect to db (json file) - move to the appropriate function later. 
-favouritesDB = open('./Databases/favourites.json')
-usersFavourites = json.load(favouritesDB)
+class Id(BaseModel):
+    id: int
+
+
+@app.get("/user/exercise/favourites")
+async def get_favourites(id: Id):
+    filepath: str = "./Databases/favourites.json"
+
+    # Try to connect to database
+    try:
+        with open(filepath, "r") as favouriteDB:
+            allUsersFavourites = json.load(favouriteDB)
+    except FileNotFoundError:
+        return {"statusCode": 503, "message": "The database could not be found"}
+
+    # Loop through current reg users and look for matches.
+    for user in allUsersFavourites:
+        # Check if id is saved
+        if user['id'] == id.id:
+            list_of_favourites: dict = []
+            for exercise in user['favourites']:
+                favourite = {
+                    "name": exercise['name'],
+                    "type": exercise['type'],
+                    "muscle": exercise['muscle'],
+                    "equipment": exercise['equipment'],
+                    "difficulty": exercise['difficulty'],
+                    "instructions": exercise['instructions']
+                }
+                list_of_favourites.append(favourite)
+            return {"statusCode": 200, "message": "The users favourites were found in the database", "favourites": list_of_favourites}
+        else:
+            return {"statusCode": 401, "message": "There are no favourites connected to this user id"}
 
 
 # --------SERVER RUN----------- 
