@@ -114,7 +114,7 @@ async def try_login(login: Login):
 
     # Loop through current reg users and look for matches.
     for user in userData:
-        # Check email fisrt, then password
+        # Check email first, then password
         if user['email'] == login.email:
             if user['password'] == login.password:
                 return {"statusCode": 200, "message": "The user was found in the database", "id": user["id"]}
@@ -170,9 +170,39 @@ async def get_exercises(search: Search_Term):
 
 
 # --------USER FAVOURITES----------- 
-#Connect to db (json file) - move to the appropriate function later. 
-favouritesDB = open('./Databases/favourites.json')
-usersFavourites = json.load(favouritesDB)
+class Id(BaseModel):
+    id: int
+
+
+@app.get("/user/exercise/favourites")
+async def get_favourites(id: Id):
+    filepath: str = "./Databases/favourites.json"
+
+    # Try to connect to database
+    try:
+        with open(filepath, "r") as favouriteDB:
+            allUsersFavourites = json.load(favouriteDB)
+    except FileNotFoundError:
+        return {"statusCode": 503, "message": "The database could not be found"}
+
+    # Loop through current reg users and look for matches.
+    for user in allUsersFavourites:
+        # Check if id is saved
+        if user['id'] == id.id:
+            list_of_favourites: dict = []
+            for exercise in user['favourites']:
+                favourite = {
+                    "name": exercise['name'],
+                    "type": exercise['type'],
+                    "muscle": exercise['muscle'],
+                    "equipment": exercise['equipment'],
+                    "difficulty": exercise['difficulty'],
+                    "instructions": exercise['instructions']
+                }
+                list_of_favourites.append(favourite)
+            return {"statusCode": 200, "message": "The users favourites were found in the database", "favourites": list_of_favourites}
+        else:
+            return {"statusCode": 401, "message": "There are no favourites connected to this user id"}
 
 
 # --------SERVER RUN----------- 
