@@ -2,16 +2,17 @@ import os
 import json
 import random
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, requests
 from pydantic import BaseModel
+import requests
 app = FastAPI()
 
 
 # --------ENCRYPTION----------- 
-load_dotenv() 
+load_dotenv('Backend\\.env') 
 # accessing and printing value - add as requirement to all calls to backend later. 
-print(os.getenv("MY_FE"))
-print(os.getenv("MY_API"))
+fe_key = os.getenv("MY_FE")
+api_key = os.getenv("MY_API")
 
 # --------SERVER----------- 
 # Is backend online? 
@@ -126,16 +127,44 @@ async def try_login(login: Login):
 
 
 # --------EXCERSISE API----------- 
-# @app.post("/api/data")
-# async def get_data(request_data: RequestData):
-#     try:
-#         api_url = 'https://api.example.com/data'
-#         async with httpx.AsyncClient() as client:
-#             response = await client.post(api_url, json=request_data.dict())
-#             api_response = response.json()
-#         return api_response
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
+
+class Exercise(BaseModel):
+    name: str
+    type: str
+    muscle: str
+    difficulty: str
+    instructions: str
+
+class Search_Term(BaseModel):
+    search: str
+
+def classify_term(search:str):
+    types = ['cardio', 'olympic_weightlifting', 'plyometrics', 'powerlifting', 'strength', 'stretching', 'strongman']
+    muscles = ['abdominals', 'abductors', 'adductors', 'biceps', 'calves', 'chest', 'forearms', 'glutes', 'hamstrings', 'lats', 'lower_back', 'middle_back', 'neck', 'quadriceps', 'traps', 'triceps']
+    difficulties = ['beginner', 'intermediate', 'expert']
+    
+    if search in types:
+        return 'type'
+    elif search in muscles:
+        return 'muscle'
+    elif search in difficulties:
+        return 'difficulty'
+    else:
+        return 'error'
+
+@app.get("/exercise/search")
+async def get_exercises(search: Search_Term):
+    theme: str = classify_term(search.search)
+    if theme != 'error':
+        api_url = 'https://api.api-ninjas.com/v1/exercises?{}={}'.format(theme, search.search)
+        response = requests.get(api_url, headers={'X-Api-Key': api_key})
+        if response.status_code == requests.codes.ok:
+            exercises = response.json()
+            return {"statusCode": response.status_code, "message": "10 exercises were found", "exercises": exercises}
+        else:
+            return {"statusCode": response.status_code, "message": response.text}
+    elif theme == 'error': 
+        return {"statusCode": 422, "message": "Invalid search term used"}
 
 
 
